@@ -144,7 +144,11 @@ class TextDatasetBuilder(object):
 
         return embeddings
     def n_vocab_in_word_vectors(self):
-        word_vectors = self._load_word_vectors()
+        word_vectors = {}
+        if self.word_vectors == 'glove':
+            word_vectors = self._load_glove_vectors()
+        elif self.word_vectors == 'custom':
+            word_vectors = self._load_custom_vectors()
         count = 0
         for word in self.vocab.keys():
             if word in word_vectors:

@@ -48,5 +48,5 @@ class SANet(nn.Module):
 
     def seq_pos(self, x):
         pos = np.repeat(np.arange(1, x.shape[0]+1).reshape(x.shape[0], 1), x.shape[1], axis=1)
-        pos[np.where(x == 0)] = 0
+        pos[np.where(x.cpu().numpy() == 0)] = 0
         return x.new(pos).long()
